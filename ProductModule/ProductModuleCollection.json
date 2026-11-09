@@ -1,0 +1,481 @@
+{
+  "info": {
+    "_postman_id": "db9d6445-5c8a-4669-85e3-beae4c7f849e",
+    "name": "Product_Module",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55585711"
+  },
+  "item": [
+    {
+      "name": "getSingleProduct",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const jsonData = pm.response.json();\r\nconst expected_schema = {\r\n  \"type\": \"object\",\r\n  \"properties\": {\r\n    \"id\": {\r\n      \"type\": \"integer\"\r\n    },\r\n    \"title\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"price\": {\r\n      \"type\": \"number\"\r\n    },\r\n    \"description\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"category\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"image\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"rating\": {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"rate\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"count\": {\r\n          \"type\": \"integer\"\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"rate\",\r\n        \"count\"\r\n      ]\r\n    }\r\n  },\r\n  \"required\": [\r\n    \"id\",\r\n    \"title\",\r\n    \"price\",\r\n    \"description\",\r\n    \"category\",\r\n    \"image\",\r\n    \"rating\"\r\n  ]\r\n}\r\n\r\npm.test(\"Response is an object and not empty\", function(){\r\n    pm.expect(jsonData).to.be.a('object').and.not.be.empty;\r\n});\r\n\r\npm.test(\"Expected products validation\", function(){\r\n    pm.expect(jsonData.id).to.be.eql(parseInt(pm.collectionVariables.get(\"id\")));\r\n});\r\n\r\npm.test(\"Expected JSON schema validation\", function(){\r\n    pm.response.to.have.jsonSchema(expected_schema);\r\n});\r\n"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"id\", \"1\"); // Set the product ID to 1"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/products/{{id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products",
+            "{{id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllProducts",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const jsonData = pm.response.json();\r\nconst expected_schema = {\r\n  \"type\": \"array\",\r\n  \"items\": [\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"integer\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"id\": {\r\n          \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n          \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n          \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"rate\": {\r\n              \"type\": \"number\"\r\n            },\r\n            \"count\": {\r\n              \"type\": \"integer\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"rate\",\r\n            \"count\"\r\n          ]\r\n        }\r\n      },\r\n      \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n      ]\r\n    }\r\n  ]\r\n}\r\n\r\nconst singleItem_Schema = {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n        \"id\": {\r\n            \"type\": \"integer\"\r\n        },\r\n        \"title\": {\r\n            \"type\": \"string\"\r\n        },\r\n        \"price\": {\r\n            \"type\": \"number\"\r\n        },\r\n        \"description\": {\r\n            \"type\": \"string\"\r\n        },\r\n        \"category\": {\r\n            \"type\": \"string\"\r\n        },\r\n        \"image\": {\r\n            \"type\": \"string\"\r\n        },\r\n        \"rating\": {\r\n            \"type\": \"object\",\r\n            \"properties\": {\r\n                \"rate\": {\r\n                    \"type\": \"number\"\r\n                },\r\n                \"count\": {\r\n                    \"type\": \"integer\"\r\n                }\r\n            },\r\n            \"required\": [\r\n                \"rate\",\r\n                \"count\"\r\n            ],\r\n            \"additionalProperties\": false\r\n        }\r\n    },\r\n    \"required\": [\r\n        \"id\",\r\n        \"title\",\r\n        \"price\",\r\n        \"description\",\r\n        \"category\",\r\n        \"image\",\r\n        \"rating\"\r\n    ]\r\n};\r\n\r\npm.test(\"Response is an array and not empty\", function () {\r\n    pm.expect(jsonData).to.be.an(\"array\").and.not.be.empty;\r\n});\r\n\r\npm.test(\"Length of the returned products(20)\",()=>{\r\n    pm.expect(jsonData.length).to.equal(20);\r\n});\r\n\r\npm.test(\"Expected JSON schema Validation\",()=>{\r\n    //Following line will check all the response items which could be in 1000s so to be optimize it we can validate only 1 item and repeat same validation for the rest\r\n  //pm.response.to.have.jsonSchema(expected_schema);\r\n  //optimized schema validation\r\n  jsonData.forEach(function(item){\r\n      pm.expect(item).to.be.jsonSchema(singleItem_Schema);\r\n  });\r\n});\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getLimitedProducts",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const jsonData = pm.response.json();\r\nconst singleProduct_schema = {\r\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r\n  \"title\": \"Generated schema for Root\",\r\n  \"type\": \"array\",\r\n  \"items\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"number\"\r\n      },\r\n      \"title\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"price\": {\r\n        \"type\": \"number\"\r\n      },\r\n      \"description\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"category\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"image\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"rating\": {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n          \"rate\": {\r\n            \"type\": \"number\"\r\n          },\r\n          \"count\": {\r\n            \"type\": \"number\"\r\n          }\r\n        },\r\n        \"required\": [\r\n          \"rate\",\r\n          \"count\"\r\n        ]\r\n      }\r\n    },\r\n    \"required\": [\r\n      \"id\",\r\n      \"title\",\r\n      \"price\",\r\n      \"description\",\r\n      \"category\",\r\n      \"image\",\r\n      \"rating\"\r\n    ]\r\n  }\r\n}\r\npm.test(\"Validate the response body schema\",()=>{\r\n      jsonData.forEach(function(item){\r\n    //pm.expect(item).to.be.jsonSchema(singleProduct_schema.items);\r\n    pm.expect(jsonData).to.be.jsonSchema(singleProduct_schema);\r\n   });\r\n});\r\npm.test(\"Response is an array and not to be an empty array\", ()=> {\r\n    pm.expect(jsonData).to.be.an('array').not.to.be.empty;\r\n});\r\npm.test(\"Length of the returned products(3)\",()=>{\r\n    pm.expect(jsonData.length).to.equal(pm.collectionVariables.get(\"limit\")*1);\r\n});\r\n\r\n//OR\r\n/*pm.test(\"products limit validation\", function(){\r\n    pm.expect(jsonData.length).to.be.eql(parseInt(pm.collectionVariables.get(\"limit\")))\r\n});  */\r\n\r\npm.test(\"Status to be 200\", () => {\r\n    pm.response.to.have.status(200);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/products?limit={{limit}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "{{limit}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getSortedProduct",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json_response = pm.response.json();\r\nconst singleItem_schema = {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n            \"id\": {\r\n                \"type\": \"integer\"\r\n            },\r\n            \"title\": {\r\n                \"type\": \"string\"\r\n            },\r\n            \"price\": {\r\n                \"type\": \"number\"\r\n            },\r\n            \"description\": {\r\n                \"type\": \"string\"\r\n            },\r\n            \"category\": {\r\n                \"type\": \"string\"\r\n            },\r\n            \"image\": {\r\n                \"type\": \"string\"\r\n            },\r\n            \"rating\": {\r\n                \"type\": \"object\",\r\n                \"properties\": {\r\n                    \"rate\": {\r\n                        \"type\": \"number\"\r\n                    },\r\n                    \"count\": {\r\n                        \"type\": \"integer\"\r\n                    }\r\n                },\r\n                \"required\": [\r\n                    \"rate\",\r\n                    \"count\"\r\n                ]\r\n            }\r\n        },\r\n        \"required\": [\r\n            \"id\",\r\n            \"title\",\r\n            \"price\",\r\n            \"description\",\r\n            \"category\",\r\n            \"image\",\r\n            \"rating\"\r\n        ]\r\n}; \r\n\r\npm.test(\"Response is an array and not empty\", function(){\r\n    pm.expect(json_response).to.be.a('array').and.not.be.empty;\r\n});\r\npm.test(\"Length of the returned products(20)\", function(){\r\n    pm.expect(json_response.length).to.be.eql(20)\r\n});\r\npm.test(\"Expected JSON schema validation\", function(){\r\n    // Optimized schema validation\r\n    json_response.forEach(function(item) {\r\n        pm.expect(item).to.be.jsonSchema(singleItem_schema);\r\n    });\r\n});\r\n\r\n// This test will check the order if asc is provided then first item should be of id 1 and if desc is provided then id should be 20\r\npm.test(\"validate returned items are in sorted order\", function(){\r\n    sorting_order = pm.collectionVariables.get(\"sort\");\r\n    if(sorting_order == 'asc'){\r\n        pm.expect(json_response[0].id).to.be.eql(1)\r\n    }else{\r\n        pm.expect(json_response[0].id).to.be.eql(20)\r\n    };\r\n});\r\npm.test(\"Status to be 200\",()=>{\r\n    pm.response.to.have.status(200);\r\n})\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products?sort={{sort}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products"
+          ],
+          "query": [
+            {
+              "key": "sort",
+              "value": "{{sort}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetProductsWithLimitAndSort",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const jsonData = pm.response.json();\r\nconst singleProduct_Schema = {\r\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r\n  \"title\": \"Generated schema for Root\",\r\n  \"type\": \"array\",\r\n  \"items\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"number\"\r\n      },\r\n      \"title\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"price\": {\r\n        \"type\": \"number\"\r\n      },\r\n      \"description\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"category\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"image\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"rating\": {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n          \"rate\": {\r\n            \"type\": \"number\"\r\n          },\r\n          \"count\": {\r\n            \"type\": \"number\"\r\n          }\r\n        },\r\n        \"required\": [\r\n          \"rate\",\r\n          \"count\"\r\n        ]\r\n      }\r\n    },\r\n    \"required\": [\r\n      \"id\",\r\n      \"title\",\r\n      \"price\",\r\n      \"description\",\r\n      \"category\",\r\n      \"image\",\r\n      \"rating\"\r\n    ]\r\n  }\r\n}\r\npm.test(\"Status to be 200\",()=>{\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Response is an array and not to be an empty array\",()=>{\r\n    pm.expect(jsonData).to.be.an('array').not.to.be.empty;\r\n});\r\npm.test(\"Validate the response body schema\",()=>{\r\n    jsonData.forEach(function(item){\r\n        pm.expect(jsonData).to.be.jsonSchema(singleProduct_Schema);\r\n    });\r\n});\r\n\r\npm.test(\"products limit validation\", function(){\r\n    pm.expect(jsonData.length).to.be.eql(parseInt(pm.collectionVariables.get(\"limit\")))\r\n}); \r\n//OR\r\n/*\r\npm.test(\"Length of the returned products(3)\",()=>{\r\n    pm.expect(jsonData.length).to.equal(pm.collectionVariables.get(\"limit\")*1);\r\n});    */\r\npm.test(\"validate returned items are in sorted order\", function(){\r\n    sorting_order = pm.collectionVariables.get(\"sort\");\r\n    if(sorting_order == 'asc'){\r\n        pm.expect(jsonData[0].id).to.be.eql(1)\r\n    }else{\r\n        pm.expect(jsonData[0].id).to.be.equal(pm.collectionVariables.get(\"limit\")*1)\r\n    };\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/products?limit={{limit}} & sort={{sort}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "{{limit}} "
+            },
+            {
+              "key": " sort",
+              "value": "{{sort}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllCategories",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\nconst jsonData = pm.response.json();\nconst expectedSchema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"string\"\n  }\n};\n\npm.test(\"Validate the response body against a JSON schema\", function () {\n  //  pm.response.to.have.jsonSchema(expectedSchema);\n  //OR\n    pm.expect(jsonData).to.be.jsonSchema(expectedSchema);\n //OR\n /*   jsonData.forEach(function(item){\n    pm.expect(jsonData).to.be.jsonSchema(expectedSchema);\n   });  */\n});\n\npm.test(\"Response is an array and not to be an empty array\",()=>{\n    pm.expect(jsonData).to.be.an('array').not.to.be.empty;\n});\npm.test(\"Validate the length of the array\",()=>{\n    pm.expect(jsonData.length).to.equal(4);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/products/categories",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getSpecificCategoryProducts",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst jsonData = pm.response.json();\r\nconst expectedSchema = {\r\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r\n  \"title\": \"Generated schema for Root\",\r\n  \"type\": \"array\",\r\n  \"items\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"number\"\r\n      },\r\n      \"title\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"price\": {\r\n        \"type\": \"number\"\r\n      },\r\n      \"description\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"category\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"image\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"rating\": {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n          \"rate\": {\r\n            \"type\": \"number\"\r\n          },\r\n          \"count\": {\r\n            \"type\": \"number\"\r\n          }\r\n        },\r\n        \"required\": [\r\n          \"rate\",\r\n          \"count\"\r\n        ]\r\n      }\r\n    },\r\n    \"required\": [\r\n      \"id\",\r\n      \"title\",\r\n      \"price\",\r\n      \"description\",\r\n      \"category\",\r\n      \"image\",\r\n      \"rating\"\r\n    ]\r\n  }\r\n}\r\npm.test(\"Response body is valid JSON Schema\", function () {\r\n    jsonData.forEach(function(item){\r\n        pm.expect(jsonData).to.be.jsonSchema(expectedSchema);\r\n    });\r\n});\r\npm.test(\"Response is an array and not to be an empty array\", ()=> {\r\n    pm.expect(jsonData).to.be.an('array').not.to.be.empty;\r\n});\r\npm.test(\"Validate the products belong to the specified category\",()=>{\r\n    var category = pm.collectionVariables.get(\"category\");\r\n    jsonData.forEach(function(item){\r\n        pm.expect(item.category).to.equal(category);\r\n    });\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/products/category/{{category}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products",
+            "category",
+            "{{category}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addProduct",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\nconst jsonData = pm.response.json();\nconst expected_schema = {\n  //\"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  //\"title\": \"Generated schema for Root\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"number\"\n    },\n    \"title\": {\n      \"type\": \"string\"\n    },\n    \"price\": {\n      \"type\": \"number\"\n    },\n    \"description\": {\n      \"type\": \"string\"\n    },\n    \"image\": {\n      \"type\": \"string\"\n    },\n    \"category\": {\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"id\",\n    \"title\",\n    \"price\",\n    \"description\",\n    \"image\",\n    \"category\"\n  ]\n}\npm.test(\"Validate the JSON Schema\",()=>{\n    pm.expect(jsonData).to.have.jsonSchema(expected_schema);\n});\n\npm.test(\"Response is an object and not to be an empty object\", ()=> {\n    pm.expect(jsonData).to.be.an('object').not.to.be.empty;\n});\npm.test(\"Validate the returned product matches the input data\",()=>{\n    pm.expect(jsonData.title).to.be.eql(pm.collectionVariables.get(\"title\"));\n    pm.expect(jsonData.price).to.be.eql(parseFloat(pm.collectionVariables.get(\"price\")));\n    pm.expect(jsonData.description).to.be.eql(pm.collectionVariables.get(\"description\"));\n    pm.expect(jsonData.category).to.be.eql(pm.collectionVariables.get(\"category\"));\n    pm.expect(jsonData.image).to.be.eql(pm.collectionVariables.get(\"image\"));\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\":{{id}},\r\n    \"title\": \"{{title}}\",\r\n    \"price\": {{price}},\r\n    \"description\": \"{{description}}\",\r\n    \"image\": \"{{image}}\",\r\n    \"category\": \"{{category}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "updateProduct",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"price\", \"125.50\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst jsonData = pm.response.json();\r\nconst expected_schema = {\r\n  //\"$schema\": \"http://json-schema.org/draft-07/schema#\",\r\n  //\"title\": \"Generated schema for Root\",\r\n  \"type\": \"object\",\r\n  \"properties\": {\r\n    \"id\": {\r\n      \"type\": \"number\"\r\n    },\r\n    \"title\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"price\": {\r\n      \"type\": \"number\"\r\n    },\r\n    \"description\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"image\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"category\": {\r\n      \"type\": \"string\"\r\n    }\r\n  },\r\n  \"required\": [\r\n    \"id\",\r\n    \"title\",\r\n    \"price\",\r\n    \"description\",\r\n    \"image\",\r\n    \"category\"\r\n  ]\r\n}\r\npm.test(\"Validate the JSON Schema\",()=>{\r\n    pm.expect(jsonData).to.have.jsonSchema(expected_schema);\r\n});\r\n\r\npm.test(\"Response is an object and not to be an empty object\", ()=> {\r\n    pm.expect(jsonData).to.be.an('object').not.to.be.empty;\r\n});\r\npm.test(\"Validate the returned product matches the input data\",()=>{\r\n    pm.expect(jsonData.id).to.be.eql(parseInt(pm.collectionVariables.get(\"id\")));\r\n    pm.expect(jsonData.title).to.be.eql(pm.collectionVariables.get(\"title\"));\r\n    pm.expect(jsonData.price).to.be.eql(parseFloat(pm.collectionVariables.get(\"price\")));\r\n    pm.expect(jsonData.description).to.be.eql(pm.collectionVariables.get(\"description\"));\r\n    pm.expect(jsonData.category).to.be.eql(pm.collectionVariables.get(\"category\"));\r\n    pm.expect(jsonData.image).to.be.eql(pm.collectionVariables.get(\"image\"));\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\":{{id}},\r\n    \"title\": \"{{title}}\",\r\n    \"price\": {{price}},\r\n    \"description\": \"{{description}}\",\r\n    \"image\": \"{{image}}\",\r\n    \"category\": \"{{category}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/{{id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products",
+            "{{id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "partialUpdateProduct",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"title\", \"Fjallraven - Foldsack No. 1 Backpack, Fits 20 Laptops\");\r\npm.collectionVariables.set(\"description\", \"Your perfect pack for everyday use and beyond. With its practical features and comfortable design, this backpack is a great companion for any adventure.\");\r\npm.collectionVariables.set(\"image\",\"https://fakestoreapi.com/img/91fpkd-2AYL._AC_SL1500_.jpg\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst jsonData = pm.response.json();\r\nconst expected_schema = {\r\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r\n  \"title\": \"Generated schema for Root\",\r\n  \"type\": \"object\",\r\n  \"properties\": {\r\n    \"id\": {\r\n      \"type\": \"number\"\r\n    },\r\n    \"title\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"description\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"image\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"category\": {\r\n      \"type\": \"string\"\r\n    }\r\n  },\r\n  \"required\": [\r\n    \"id\",\r\n    \"title\",\r\n    \"description\",\r\n    \"image\",\r\n    \"category\"\r\n  ]\r\n}\r\npm.test(\"Validate the JSON Schema\",()=>{\r\n    pm.expect(jsonData).to.have.jsonSchema(expected_schema);\r\n});\r\n\r\npm.test(\"Response is an object and not to be an empty object\", ()=> {\r\n    pm.expect(jsonData).to.be.an('object').not.to.be.empty;\r\n});\r\npm.test(\"Validate the returned product matches the input data\",()=>{\r\n    pm.expect(jsonData.id).to.be.eql(parseInt(pm.collectionVariables.get(\"id\")));\r\n    pm.expect(jsonData.title).to.be.eql(pm.collectionVariables.get(\"title\"));\r\n    pm.expect(jsonData.description).to.be.eql(pm.collectionVariables.get(\"description\"));\r\n    pm.expect(jsonData.category).to.be.eql(pm.collectionVariables.get(\"category\"));\r\n    pm.expect(jsonData.image).to.be.eql(pm.collectionVariables.get(\"image\"));\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"{{title}}\",\r\n    \"description\": \"{{description}}\",\r\n    \"image\": \"{{image}}\",\r\n    \"category\": \"{{category}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/{{id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products",
+            "{{id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteProduct",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/{{id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products",
+            "{{id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "pm.collectionVariables.set(\"id\", 1);\r",
+          "pm.collectionVariables.set(\"title\",\"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops\" );\r",
+          "pm.collectionVariables.set(\"price\",109.95 );\r",
+          "pm.collectionVariables.set(\"description\",\"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday\" );\r",
+          "pm.collectionVariables.set(\"category\",\"men's clothing\" );\r",
+          "pm.collectionVariables.set(\"image\",\"https://fakestoreapi.com/img/91fpkd-2AYL._AC_SL1500_.jpg\" );\r",
+          "pm.collectionVariables.set(\"rate\",3.9 );\r",
+          "pm.collectionVariables.set(\"count\",120 );\r",
+          "pm.collectionVariables.set(\"limit\",3);\r",
+          "pm.collectionVariables.set(\"sort\",\"asc\");"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "id",
+      "value": ""
+    },
+    {
+      "key": "title",
+      "value": ""
+    },
+    {
+      "key": "price",
+      "value": ""
+    },
+    {
+      "key": "description",
+      "value": ""
+    },
+    {
+      "key": "category",
+      "value": ""
+    },
+    {
+      "key": "image",
+      "value": ""
+    },
+    {
+      "key": "rate",
+      "value": ""
+    },
+    {
+      "key": "count",
+      "value": ""
+    },
+    {
+      "key": "limit",
+      "value": ""
+    },
+    {
+      "key": "sort",
+      "value": ""
+    }
+  ]
+}
